@@ -1,5 +1,7 @@
 nodePoint
 
+- On chcecking in npm paclages: see blog the npm debacle
+
 Minimum marketable feature
 - ?
 
@@ -12,6 +14,9 @@ User stories:
 
 TODO:
 - Automated Build
-- Continouus Integration
 - Server side testing
+	- Test grunt nodeunit task
 - Client side testing
+- Check jshint options
+	- Evaluate usage of /*jslint node: true */ in cojunction with lint settings
+- Setup Continouus Integration on SP Server before first integration test
