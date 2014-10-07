@@ -1,6 +1,7 @@
 nodePoint
 
 - On chcecking in npm paclages: see blog the npm debacle
+	- might be solved by .package dependencies
 
 Minimum marketable feature
 - ?
@@ -21,3 +22,4 @@ TODO:
 	- Evaluate usage of /*jslint node: true */ in cojunction with lint settings
 - Setup Continouus Integration on SP Server before first integration test
 - Add copyright header to files
+- Check if it is possible to run grunt batch from sublime
