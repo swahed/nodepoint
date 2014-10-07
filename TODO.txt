@@ -20,3 +20,4 @@ TODO:
 - Check jshint options
 	- Evaluate usage of /*jslint node: true */ in cojunction with lint settings
 - Setup Continouus Integration on SP Server before first integration test
+- Add copyright header to files
