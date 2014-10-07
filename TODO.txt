@@ -1,0 +1,17 @@
+nodePoint
+
+Minimum marketable feature
+- ?
+
+User stories:
+- Hello world for server
+- Hello world for client
+- View online list of SharePoint lists in a website
+- View List entries in a list
+- CRUD entries in a list
+
+TODO:
+- Automated Build
+- Continouus Integration
+- Server side testing
+- Client side testing
