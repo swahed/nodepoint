@@ -10,8 +10,7 @@ exports.setUp = function(done) {
 	done();
 };
 
-exports.tearDown = function(done)
-{
+exports.tearDown = function(done) {
 	//TODO: Check if started
 	if(server.isRunning()) {
 		server.stop(function(){
