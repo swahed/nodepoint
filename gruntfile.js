@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       node:{
-        src: ["src/*.js", "src/server/**/*.js", "gruntfile.js"],
+        src: ["src/*.js", "src/sp/**/*.js", "src/server/**/*.js", "gruntfile.js"],
         options: nodeLintOptions()
       },
       browser: {
