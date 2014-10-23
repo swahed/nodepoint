@@ -131,9 +131,9 @@ viewModel.InputPanel = new InputPanel(listFormMode);
 for(i=0;i = view.Fields.length - 1;i++)
 {
 	var field = view.Fields[i];
-	if((listFormMode == 1 && field.ShowInNewForm = true) ||
-	   (listFormMode == 2 && field.ShowInEditForm = true) ||
-	   (listFormMode == 2 && field.ShowInViewForm = true))
+	if((listFormMode === 1 && field.ShowInNewForm === true) ||
+	   (listFormMode === 2 && field.ShowInEditForm === true) ||
+	   (listFormMode === 2 && field.ShowInViewForm === true))
 	{
 		viewModel.InputPanel.Add({"Title" : field.title, "Type" : field.FieldType, "Required" : field.Required});
 	}

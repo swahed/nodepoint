@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       }
     },
     nodeunit:{
-      all: ["src/_*_test.js", "src/server/**/_*_test.js"]
+      all: ["src/_*.test.js", "src/server/**/_*.test.js"]
     }
   });
 

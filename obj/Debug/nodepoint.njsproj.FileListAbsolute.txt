@@ -1,0 +1,2 @@
+C:\node\nodepoint\obj\Debug\nodepoint.njsprojResolveAssemblyReference.cache
+C:\node\nodepoint\bin\Microsoft.NodejsTools.WebRole.dll
