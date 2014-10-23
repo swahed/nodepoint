@@ -73,51 +73,27 @@ var value = item[fieldName];
 // 		- Fields / Contents of publishing pages
 
 // Create context // Does a context object make sense to keep shared objects?
-SPContext.Current = new SPContext();
-SPContext.Current.Site = new SPSite(url);
-SPContext.Current.Web = SPContext.Current.Site.OpenWeb();
+SPContext.Current = new SPContext(); //x
+SPContext.Current.Site = new SPSite(url); //x
+SPContext.Current.Web = SPContext.Current.Site.OpenWeb();//x
 
-SPContext.Current.ListId = ""; //???
-SPContext.Current.ViewId = ""; //???
-SPContext.Current.FormMode = 0; // ???
+SPContext.Current.ListId = ""; //o
+SPContext.Current.ViewId = ""; //o
+SPContext.Current.FormMode = 0; //o
 
 // Destroy at the end of request
-SPContext.Current.Site.Dispose();
-SPContext.Current.Web.Dispose();
-
-// Draw navigation: Get navigation nodes to draw navigation
-var site = SPContext.Current.Site;
-var web = SPContext.Current.Web;
-
-var nodes = web.Navigation.QuickNavigation;
-viewModel.QuickNavigation = new Navigation();
-for(i=0;i = nodes.length - 1;i++)
-{
-	var node = nodes[i];
-	var title = node.Title;	
-	var url = node.Url;
-	viewModel.Navigation.Add({ "Title" : title, "Url" : url});
-}
-
-nodes = web.Navigation.QuickNavigation;
-viewModel.TopNavigation = new Navigation();
-for(i=0;i = nodes.length - 1;i++)
-{
-	var node = nodes[i];
-	var title = node.Title;	
-	var url = node.Url;
-	viewModel.Navigation.Add({ "Title" : title, "Url" : url});
-}
+SPContext.Current.Site.Dispose(); //x
+SPContext.Current.Web.Dispose(); //x
 
 // List website contents: Get lists for viewAllsitecontents
-var lists = web.Lists;
+var lists = web.Lists; //x
 viewModel.GridView = new GridView();
 for(i=0;i = lists.length - 1;i++)
 {
-	var list = lists[i];
-	var title = list.Url;	
-	var type = list.Type;
-	var url = list.RootFolder.Url;
+	var list = lists[i]; 	//x
+	var title = list.Url;	//x
+	var type = list.Type;	//x
+	var url = list.RootFolder.Url; //x
 	viewModel.GridView.Add({ "Title" : title, "Url" : url, "Type" :  type});
 }
 
@@ -161,4 +137,28 @@ for(i=0;i = view.Fields.length - 1;i++)
 	{
 		viewModel.InputPanel.Add({"Title" : field.title, "Type" : field.FieldType, "Required" : field.Required});
 	}
+}
+
+// Draw navigation: Get navigation nodes to draw navigation
+var site = SPContext.Current.Site;
+var web = SPContext.Current.Web;
+
+var nodes = web.Navigation.QuickNavigation;
+viewModel.QuickNavigation = new Navigation();
+for(i=0;i = nodes.length - 1;i++)
+{
+	var node = nodes[i];
+	var title = node.Title;	
+	var url = node.Url;
+	viewModel.Navigation.Add({ "Title" : title, "Url" : url});
+}
+
+nodes = web.Navigation.QuickNavigation;
+viewModel.TopNavigation = new Navigation();
+for(i=0;i = nodes.length - 1;i++)
+{
+	var node = nodes[i];
+	var title = node.Title;	
+	var url = node.Url;
+	viewModel.Navigation.Add({ "Title" : title, "Url" : url});
 }

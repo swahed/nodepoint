@@ -26,7 +26,7 @@ exports.Site = function (Url, callback) {
         self.ID = site.ID;
 		self.Url = site.Url; 
 		self._ContructorUrl = Url;
-		getWeb(site.Url, function getRootWebCompleted(web) {
+		getWeb(site.Url, function getRootWebCompleted(error, web) {
 			self.RootWeb = web;
 			callback(self);
 		});
@@ -40,29 +40,27 @@ var getWeb = edge.func(function(){/*
 	using System.Dynamic;
 
 	async (input) => { 
-		var site = SPContext.Current.Site;  			// TODO: Does not use correct site
+        var site = SPContext.Current.Site;  			// TODO: Does not use correct site
 
-		if(input != null)
-		{
-			var url = (string)input;
-			using(var web = site.OpenWeb(url))		// TODO: Does not use url
-			{
-				return new {
-					ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-					Url = web.Url
-				};
-			}
-
-		}else{
+        if(string.IsNullOrEmpty(input as string))
+        {
 			using(var web = site.OpenWeb())
-			{
-				return new {
-					ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-					Url = web.Url
-				};
-			}
-		}
-		
+	        {
+		        return new {
+			        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+			        Url = web.Url
+		        };
+	        }
+        }else{
+        	var url = (string)input;
+	        using(var web = site.OpenWeb(url))
+	        {
+		        return new {
+			        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+			        Url = web.Url
+		        };
+	        }
+        }
     }
 */});
 

@@ -93,7 +93,6 @@ exports.OpenWebOpensubWebById = function(test){
 
 exports.RootWebIsCorrect = function(test){
     var site = new SP.Site(testSubWebUrl, function(site){
-        console.log(site.RootWeb);
         var rootWeb = site.RootWeb;
         test.equal(rootWeb.ID, testRootWebId);
         test.done();

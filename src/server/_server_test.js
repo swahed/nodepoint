@@ -35,7 +35,6 @@ exports.isServerStartedStatusCorrect = function(test){
 exports.testServerRespondsToRequests = function(test) {
 	server.start();
 
-	console.log("respond test started");
 	var portNumber = server.getPortNumber();
 	http.get("http://localhost:" + portNumber, function(res){
 		res.on("data", function(){});
