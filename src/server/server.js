@@ -5,6 +5,8 @@ var server;
 var portNumber = 8080;
 var isRunning = false;
 
+// Test Comment
+
 exports.getPortNumber = function() {
 	return portNumber;
 };
