@@ -26,7 +26,10 @@ exports.Site = function (Url, callback) {
         self.ID = site.ID;
 		self.Url = site.Url; 
 		self._ContructorUrl = Url;
-		callback(self);
+		getWeb(site.Url, function getRootWebCompleted(web) {
+			self.RootWeb = web;
+			callback(self);
+		});
 	});
 };
 
@@ -37,20 +40,33 @@ var getWeb = edge.func(function(){/*
 	using System.Dynamic;
 
 	async (input) => { 
-		var site = SPContext.Current.Site;  // TODO: Does not use correct site
-		using(var web = site.OpenWeb(input)) // TODO: Does not use url
+		var site = SPContext.Current.Site;  			// TODO: Does not use correct site
+
+		if(input != null)
 		{
-			return new {
-				ID = web.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
-				Url = web.Url
-			};
+			var url = (string)input;
+			using(var web = site.OpenWeb(url))		// TODO: Does not use url
+			{
+				return new {
+					ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+					Url = web.Url
+				};
+			}
+
+		}else{
+			using(var web = site.OpenWeb())
+			{
+				return new {
+					ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+					Url = web.Url
+				};
+			}
 		}
+		
     }
 */});
 
 var Web = function(){
-	//this.ID = "";
-	//this.Url = "";
 };
 
 exports.Site.Web = Web;
@@ -58,19 +74,21 @@ exports.Site.Web = Web;
 exports.Site.prototype.OpenWeb = function(url, callback)
 {
 	if(typeof url === "undefined" || url === null) {
-		if(this._ContructorUrl === null)
-			getWeb(this.Url);
-		else
-			getWeb(this._ContructorUrl);
+		if(this._ContructorUrl === null) {
+			getWeb(this.Url, getWebComplete);
+		}
+		else {
+			getWeb(this._ContructorUrl, getWebComplete);
+		}
 	} else {
-		throw "Not Implemented";
+		getWeb(url, getWebComplete);
 	}
 
-	getWeb(url, function getSiteCompleted(error, result){
+	function getWebComplete(error, result){
 		if(error) throw error;
 		var web = new Web();
         web.ID = result.ID;
 		web.Url = result.Url; 
 		callback(web);
-	});
+	}
 };

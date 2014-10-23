@@ -15,15 +15,29 @@ exports.SiteModuleExportsFunction = function(test){
     test.done();
 };
 
-exports.SiteHasCorrectId = function(test){
-    var site = new SP.Site("http://localhost/sites/teamsite", function(site){ // TODO: Why can this not be accomplished ith a closure
+exports.SiteByUrlHasCorrectId = function(test){
+    var site = new SP.Site(testSiteUrl, function(site){ // TODO: Why can this not be accomplished ith a closure
 		test.equal(site.ID, testSiteId);
 		test.done();
 	});
 };
 
-exports.SiteHasCorrectUrl = function(test){
-    var site = new SP.Site("http://localhost/sites/teamsite", function(site){
+exports.SiteByIDHasCorrectId = function(test){
+    var site = new SP.Site(testSiteId, function(site){ // TODO: Why can this not be accomplished ith a closure
+        test.equal(site.ID, testSiteId);
+        test.done();
+    });
+};
+
+exports.SiteByUrlHasCorrectUrl = function(test){
+    var site = new SP.Site(testSiteUrl, function(site){
+        test.equal(site.Url, testSiteUrl);
+        test.done();
+    });
+};
+
+exports.SiteByIDHasCorrectUrl = function(test){
+    var site = new SP.Site(testSiteId, function(site){
         test.equal(site.Url, testSiteUrl);
         test.done();
     });
@@ -32,7 +46,7 @@ exports.SiteHasCorrectUrl = function(test){
 exports.OpenWebOpenRootWebWhenSiteWasCreatedWithRootWebUrl = function(test){
     var site = new SP.Site(testSiteUrl, function(site){
         var web = site.OpenWeb(null, function(web){
-            test.equal(web.ID, testRootWebId);
+            test.equal(web.ID, testRootWebId, "Wrong ID for web with url" + testSiteUrl);
             test.done();
         });
     });
@@ -41,57 +55,54 @@ exports.OpenWebOpenRootWebWhenSiteWasCreatedWithRootWebUrl = function(test){
 exports.OpenWebOpensubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
     var site = new SP.Site(testSubWebUrl, function(site){
         var web = site.OpenWeb(null, function(web){
+            test.equal(web.ID, testSubWebId, "Wrong ID for web with url " + testSubWebUrl);
+            test.done();
+        });
+    });
+};
+
+exports.OpenWebOpenSubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
+    var site = new SP.Site(testSubWebUrl, function(site){
+        var web = site.OpenWeb(testSubWebUrl, function(web){
             test.equal(web.ID, testSubWebId);
             test.done();
         });
     });
 };
 
-/* 
-       
+exports.OpenWebOpenRootWebWhenSiteWasCreatedWithsubWebUrl = function(test){
+    var site = new SP.Site(testSubWebUrl, function(site){
+        var web = site.OpenWeb(testSiteUrl, function(web){
+            test.equal(web.ID, testRootWebId);
+            test.done();
+        });
+    });
+};
 
-        // TODO: Correct web needs to be opened if the url of an element within the web (i.e. list) has been entereds
+/* TODO: Conecpt on how to implement this... options object? {Url: ..., ID: ...}
+exports.OpenWebOpensubWebById = function(test){
+    test.fail(":)");
+    var site = new SP.Site(testSubWebUrl, function(site){
+        var web = site.OpenWeb(testSubWebId, function(web){
+            test.equal(web.ID, testSubWebId);
+            test.equal(web.Url, testSubWebUrl);
+            test.done();
+        });
+    });
+};*/
 
-        [TestMethod]
-        public void OpenWebOpensubWebByUrl()
-        {
-            SPSite site = new SPSite(testSubWebUrl);
-            SPWeb web = site.OpenWeb(testSubWebUrl);
-            Assert.AreEqual(web.ID, testSubWebId);
-        }
+exports.RootWebIsCorrect = function(test){
+    var site = new SP.Site(testSubWebUrl, function(site){
+        console.log(site.RootWeb);
+        var rootWeb = site.RootWeb;
+        test.equal(rootWeb.ID, testRootWebId);
+        test.done();
+    });
+};
 
-        [TestMethod]
-        public void OpenWebOpensubWebById()
-        {
-            SPSite site = new SPSite(testSubWebUrl);
-            SPWeb web = site.OpenWeb(testSubWebId);
-            Assert.AreEqual(web.ID, testSubWebId);
-        }
-
-        [TestMethod]
-        public void RootWebIsCorrect()
-        {
-            SPSite site = new SPSite(testSubWebUrl);
-            SPWeb rootWeb = site.RootWeb;
-            Assert.AreEqual(rootWeb.ID, testRootWebId);
-            Assert.AreEqual(rootWeb.Url, testSiteUrl);
-        }
-
-        [TestMethod]
-        public void DisposeInUsingBlock()
-        {
-            using (SPSite site = new SPSite(testSiteId))
-            {
-            }
-        }
-
-        // TODO:
-        //[TestMethod]
-        //public void DiposeDisposes()
-        //{
-        //    SPSite site = new SPSite(testSubWebUrl);
-        //    site.Dispose();
-        //    System.GC.WaitForPendingFinalizers();
-        //    Assert.IsNull(site);
-        //}
-*/
+/*exports.DiposeDisposes = function(test){
+    var site = new SP.Site(testSubWebUrl, function(site){
+        site.Dispose(); 
+        test.IsNull(site);
+    });
+};*/
