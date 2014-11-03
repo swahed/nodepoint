@@ -5,22 +5,27 @@ var Web = require("./web");
 
 var getSite = edge.func(function(){/*
 	#r "FakePoint.dll"
-	
+
 	using Microsoft.SharePoint;
 	using System.Dynamic;
 
 	async (input) => { 
-		var site = SPContext.Current.Site; // TODO: Does not use url parameter
+		SPSite site = await Task.Run(() =>
+	    {
+            return new SPSite(input.ToString());
+	    });
 
-		return new {
-			ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
-			Url = site.Url
-		};
+	    return new {
+		    ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
+		    Url = site.Url
+	    };
     }
 */});
 
 var Site = function (Url, callback) {
 	//if(typeof callback !== "function") throw "Callback parameter is not a function"; // TODO
+	//if(!url || !url.match()) TODO: Validate URL
+	//	throw "Site url parameter is not a full url";
 	var self = this;
 	getSite(Url, function getSiteCompleted(error, site){
 		if(error) throw error;
