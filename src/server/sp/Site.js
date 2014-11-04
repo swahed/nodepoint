@@ -12,10 +12,16 @@ var getSite = edge.func(function(){/*
 	async (input) => { 
 		SPSite site = await Task.Run(() =>
 	    {
-            return new SPSite(input.ToString());
+	    	var s = input as string;
+            Guid id = new Guid();
+            if (Guid.TryParse(s, out id))
+                return new SPSite(id);
+            else
+                return new SPSite(s);
 	    });
 
 	    return new {
+	    	Title = site.Title,
 		    ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
 		    Url = site.Url
 	    };
@@ -29,6 +35,7 @@ var Site = function (Url, callback) {
 	var self = this;
 	getSite(Url, function getSiteCompleted(error, site){
 		if(error) throw error;
+        self.Title = site.Title;
         self.ID = site.ID;
 		self.Url = site.Url; 
 		self._ContructorUrl = Url;
