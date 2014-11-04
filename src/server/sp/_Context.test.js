@@ -7,8 +7,8 @@ var contextCreator = require("./Context.js");
 var context = null;
 
 var app = express();
-app.use("*", contextCreator);
-app.get("/sites/:sitename", function(req, res){
+app.use("*", contextCreator); // TODO: This will probably duplicate all or part of the routing logic
+app.get("*", function(req, res){
 	context = req.SPContext;
 	res.end("done");
 });
@@ -76,8 +76,27 @@ exports.test_OtherSiteIsCorrect = function(test){
 		test.equal(context.Current.Site.Url, testSiteUrl2, "Context.Current.Site.Url is wrong");
 		test.equal(context.Current.Site.ID, testSiteId2, "Context.Current.Site.Id is wrong");
 		test.done();
-	});	
+	});
 };
+
+/* TODO:
+	Web
+	List
+	ListId
+	ListItem
+	Item
+	ItemId
+	Fields
+	FormContext
+		FormMode
+	ViewContext
+		View
+		ViewId
+		ViewType
+	File
+	FileLevel
+	IsDesignTime
+*/
  
 // TODO: There should be a global methode for testing http requests
 function httpGetAndEndTest(test, url, dataCallback, endCallback){
