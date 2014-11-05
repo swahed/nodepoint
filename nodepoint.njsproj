@@ -39,7 +39,8 @@
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
-    <Compile Include="tests\app.test.js" />
+    <Compile Include="server.js" />
+    <Compile Include="tests\server.test.js" />
     <Compile Include="tests\sp\SharePoint.test.js" />
     <Compile Include="tests\sp\Web.test.js" />
     <Compile Include="tests\sp\Context.test.js" />
