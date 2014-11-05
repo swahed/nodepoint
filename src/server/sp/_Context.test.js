@@ -14,7 +14,6 @@ app.get("*", function(req, res){
 });
 
 var server;
-
 exports.setUp = function (done) {
 	server = http.createServer(app).listen(port, function() {
 		done();

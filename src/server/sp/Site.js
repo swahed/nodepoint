@@ -58,7 +58,7 @@ Site.prototype.OpenWeb = function(openUrl, callback)
 		}
 	}
 
-	var web = new Web(webUrl, function OpenWebComplete(web){ // TODO: web.Web??
+	var web = new Web(webUrl, function OpenWebComplete(web){
 		callback(web);
 	});
 };
