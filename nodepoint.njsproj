@@ -1,58 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>nodepoint</Name>
+    <RootNamespace>nodepoint</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2840b634-a970-421f-a90c-68e8cdb012b5}</ProjectGuid>
-    <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
-    <StartupFile>src\server\server.js</StartupFile>
+    <ProjectGuid>99e2ac2a-2c75-4976-b3c6-1a6a6e7dc753</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>bin\www</StartupFile>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ProjectView>ProjectFiles</ProjectView>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>true</StartWebBrowser>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
-    <Content Include="package.json" />
-    <Content Include="README.md" />
-    <Content Include="FakePoint.Fakes.manifest.xml" />
+    <Compile Include="app.js" />
     <Compile Include="gruntfile.js" />
-    <Compile Include="spikes\api\server.js" />
-    <Compile Include="spikes\http_server\http_server.js" />
-    <Compile Include="spikes\using_fakes\fakes_test.js" />
-    <Compile Include="src\client\client.js" />
-    <Compile Include="src\server\server.js" />
-    <Compile Include="src\server\_server.test.js" />
-    <Compile Include="src\server\sp\SharePoint.js" />
-    <Compile Include="src\server\sp\Site.js" />
-    <Compile Include="src\server\sp\Web.js" />
-    <Compile Include="src\server\sp\_SharePoint.test.js" />
-    <Compile Include="src\server\sp\_Site.test.js" />
-    <Compile Include="src\server\sp\_Web.test.js" />
+    <Compile Include="libs\sp\Context.js" />
+    <Compile Include="libs\sp\SharePoint.js" />
+    <Compile Include="libs\sp\Site.js" />
+    <Compile Include="libs\sp\Web.js" />
+    <Compile Include="routes\index.js" />
+    <Compile Include="routes\users.js" />
+    <Compile Include="bin\www" />
+    <Compile Include="tests\app.test.js" />
+    <Compile Include="tests\sp\SharePoint.test.js" />
+    <Compile Include="tests\sp\Web.test.js" />
+    <Compile Include="tests\sp\Context.test.js" />
+    <Compile Include="tests\sp\Site.test.js" />
+    <Content Include="package.json" />
+    <Content Include="public\css\style.styl" />
+    <Content Include="README.md" />
+    <Content Include="views\index.jade" />
+    <Content Include="views\layout.jade" />
+    <Content Include="views\error.jade" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="spikes" />
-    <Folder Include="spikes\api" />
-    <Folder Include="spikes\http_server" />
-    <Folder Include="spikes\using_fakes" />
-    <Folder Include="src" />
-    <Folder Include="src\client" />
-    <Folder Include="src\server" />
-    <Folder Include="src\server\sp" />
+    <Folder Include="bin\" />
+    <Folder Include="libs\" />
+    <Folder Include="libs\sp\" />
+    <Folder Include="models\" />
+    <Folder Include="public\" />
+    <Folder Include="public\assets\" />
+    <Folder Include="public\js\" />
+    <Folder Include="public\css\" />
+    <Folder Include="routes\" />
+    <Folder Include="tests\" />
+    <Folder Include="tests\sp\" />
+    <Folder Include="views\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>
-      node .\node_modules\grunt-cli\bin\grunt %*
-    </PostBuildEvent>
-  </PropertyGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>
     <VisualStudio>

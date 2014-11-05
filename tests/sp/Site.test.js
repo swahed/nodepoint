@@ -1,5 +1,7 @@
 "use strict";
 
+var Site = require("../../libs/sp/site");
+
 var testSiteId = "{BC0D7FEA-75BA-4015-8B88-A7331AF06418}";
 var testRootWebId = "{23A258FF-CEB6-4ABD-9069-0EDD1991D5FD}";
 var testSubWebId = "{D5A29DC2-2C8B-4FF6-AC32-5E891D373B1C}"; // TODO: Implement a Guid object - new Guid("{D5A29DC2-2C8B-4FF6-AC32-5E891D373B1C}")
@@ -8,8 +10,6 @@ var testSiteId2 = "{819135FE-402E-44BB-A4BA-34E9C8495A53}";
 var testSiteUrl = "http://localhost/sites/teamsite";
 var testSubWebUrl = "http://localhost/sites/teamsite/subsite";
 var testSiteUrl2 = "http://localhost/sites/anotherteamsite";
-
-var Site = require("./site");
 
 exports.SiteModuleExportsFunction = function(test){
     test.equal(Site !== null, true, "Exported object is null.");

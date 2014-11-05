@@ -1,6 +1,6 @@
 "use strict";
 
-var SP = require("./SharePoint");
+var SP = require("../../libs/sp/SharePoint");
 
 exports.SPSiteModuleExportsFunction = function(test){
     test.equal(SP.Site !== null, true, "Exported object is null.");
