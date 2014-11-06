@@ -2,6 +2,31 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/style.css')
+    block scripts
   body
-    block content
+   header
+        hgroup
+            h1 Sitename
+            h2 Contentname
+        p Description
+    nav.top
+        a(href='#') Website 1 |
+        a(href='#') Website 2 |
+        a(href='#') Website 3 |
+        a(href='#') Website 4 |
+        a(href='#') Website 5
+    nav.left
+        ul
+            li
+                a(href='#') List 1 
+            li
+                a(href='#') List 2
+            li
+                a(href='#') List 3
+            li
+                a(href='#') List 4
+            li
+                a(href='#') List 5
+    section.main
+        block content

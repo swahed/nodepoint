@@ -1,0 +1,25 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+header {
+  padding-left: 116px;
+}
+nav.top {
+  padding-left: 116px;
+}
+nav.left {
+  width: 100px;
+  display: inline;
+  margin-right: 16px;
+}
+nav.left {
+  float: left;
+}
+section.main {
+  width: 844px;
+  display: inline;
+  float: left;
+}
