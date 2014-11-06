@@ -56,6 +56,6 @@ sftp-config.json
 *.sln.docstates
 
 # Build results
-[Bb]in/
+[Bb]in/*
 [Oo]bj/
-!www
+![Bb]in/www
