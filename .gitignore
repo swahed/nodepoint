@@ -58,4 +58,4 @@ sftp-config.json
 # Build results
 [Bb]in/
 [Oo]bj/
-!bin/www
+!www
