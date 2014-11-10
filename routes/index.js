@@ -1,9 +1,16 @@
-﻿var express = require('express');
+﻿"use strict";
+
+var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
+var lists = require('../routes/lists');
+
+router.get('/sites/:sitename', function (req, res) {
+	context = req.SPContext;
+	if(!context.Site) next();
+    res.render('index', { title: context.Site.Title });
 });
+
+router.use('/lists', lists);
 
 module.exports = router;

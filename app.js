@@ -8,7 +8,7 @@ var path = require('path');
 //var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var contextCreator = require("./libs/sp/Context.js");
 
 var app = express();
 
@@ -25,8 +25,8 @@ app.set('view engine', 'jade');
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/", contextCreator); // TODO: This will probably duplicate all or part of the routing logic
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) { // TODO:: Unit test

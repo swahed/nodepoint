@@ -18,6 +18,7 @@ var getWeb = edge.func(function () {/*
 	        {
 		        return new {
 			        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                    Title = web.Title,
 			        Url = web.Url
 		        };
 	        }
@@ -32,6 +33,7 @@ var getWeb = edge.func(function () {/*
 		        {
 			        return new {
 				        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                        Title = web.Title,                        
 				        Url = web.Url
 			        };
 		        }
@@ -42,6 +44,7 @@ var getWeb = edge.func(function () {/*
 		        {
 			        return new {
 				        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                        Title = web.Title,                        
 				        Url = web.Url
 			        };
 		        }
@@ -59,6 +62,7 @@ var Web = function (Url, callback)
         if (error) throw error;
         this.ID = result.ID;
         this.Url = result.Url;
+        this.Title = result.Title;
         this.Lists = {};
         callback(this);
     });

@@ -2,6 +2,7 @@
 
 var http = require("http");
 var app = require("./app");
+
 var server;
 var _portNumber;
 var isRunning = false;
@@ -17,16 +18,15 @@ exports.isRunning = function () {
 exports.start = function (portNumber, callback) {
     if (!portNumber) throw new Error("PortNumber is undefined.");
     _portNumber = portNumber;
-    server = http.createServer(app);
-    server.listen(_portNumber, function () {
+    server = http.createServer(app).listen(_portNumber, function () {
         isRunning = true;
         callback();
     });
 };
 
-exports.stop = function (done) {
+exports.stop = function (callback) {
     server.close(function () {
         isRunning = false;
-        done();
+        callback();
     });
 };

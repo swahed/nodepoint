@@ -9,6 +9,10 @@ var testSubWebUrl = "http://localhost/sites/teamsite/subsite";
 var testOtherSubWebId = "{0D7AB796-0D1F-4C58-BCD1-A1205F9D85E9}";
 var testOtherSubWebUrl = "http://localhost/sites/teamsite/subsite2";
 
+var testRootWebTitle = "Teamsite Rootweb";
+var testSubWebTitle = "Teamsite Subweb";
+var testRootWebTitle2 = "Teamsite 2 Rootweb";
+
 var site;
 // TODO: Setup with other site
 exports.setUp = function (done) {
@@ -66,6 +70,15 @@ exports.GetterWithUrlOpensCorrectWeb = function (test) {
 exports.WebHasCorrectUrl = function (test) {
     var web = site.OpenWeb(testSubWebId, function (web) {
         test.equal(web.Url, testSubWebUrl, "Wrong Url for web with url" + testSubWebId);
+        test.done();
+    });
+};
+
+exports.WebHasCorrectTitle = function (test) {
+    var web     = site.RootWeb;
+    test.equal(web.Title, testRootWebTitle, "Wrong Title for web with url " + site.Url);
+    web = site.OpenWeb(testSubWebId, function (web) {
+        test.equal(web.Title, testSubWebTitle, "Wrong Title for web with url" + testSubWebId);
         test.done();
     });
 };

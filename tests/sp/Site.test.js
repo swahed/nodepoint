@@ -10,6 +10,10 @@ var testSiteId2 = "{819135FE-402E-44BB-A4BA-34E9C8495A53}";
 var testSiteUrl = "http://localhost/sites/teamsite";
 var testSubWebUrl = "http://localhost/sites/teamsite/subsite";
 var testSiteUrl2 = "http://localhost/sites/anotherteamsite";
+var testNonExistentSiteUrl = "http://localhost/sites/nonexistent";
+
+var testSiteTitle = "SPSite Url=http://localhost/sites/teamsite";
+var testSiteTitle2 = "SPSite Url=http://localhost/sites/anotherteamsite";
 
 exports.SiteModuleExportsFunction = function(test){
     test.equal(Site !== null, true, "Exported object is null.");
@@ -17,47 +21,58 @@ exports.SiteModuleExportsFunction = function(test){
     test.done();
 };
 
-exports.SiteByUrlHasCorrectId = function(test){
+exports.SiteHasCorrectId = function(test){
     var site = new Site(testSiteUrl, function(site){ // TODO: Why can this not be accomplished ith a closure
 		test.equal(site.ID, testSiteId);
-		
-        var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
-            test.equal(anotherSite.ID, testSiteId2);
-            test.done();
+        site = new Site(testSiteId, function(site){ 
+            test.equal(site.ID, testSiteId);
+            var anotherSite = new Site(testSiteId2, function(anotherSite){ 
+                test.equal(anotherSite.ID, testSiteId2);
+                anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+                    test.equal(anotherSite.ID, testSiteId2);
+                    test.done();
+                });
+            });
         });
 	});
 };
 
-exports.SiteByIDHasCorrectId = function(test){
-    var site = new Site(testSiteId, function(site){ // TODO: Why can this not be accomplished ith a closure
-        test.equal(site.ID, testSiteId);
-
-        var anotherSite = new Site(testSiteId2, function(anotherSite){ 
-            test.equal(anotherSite.ID, testSiteId2);
-            test.done();
-        });
-    });
-};
-
-exports.SiteByUrlHasCorrectUrl = function(test){
+exports.SiteHasCorrectUrl = function(test){
     var site = new Site(testSiteUrl, function(site){
         test.equal(site.Url, testSiteUrl);
-        
-        var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
-            test.equal(anotherSite.Url, testSiteUrl2);
-            test.done();
+        site = new Site(testSiteId, function(site){
+            test.equal(site.Url, testSiteUrl);
+            var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+                test.equal(anotherSite.Url, testSiteUrl2);
+                anotherSite = new Site(testSiteId2, function(anotherSite){ 
+                    test.equal(anotherSite.Url, testSiteUrl2);
+                    test.done();
+                });
+            });
         });
     });
 };
 
-exports.SiteByIDHasCorrectUrl = function(test){
-    var site = new Site(testSiteId, function(site){
-        test.equal(site.Url, testSiteUrl);
-        
-        var anotherSite = new Site(testSiteId2, function(anotherSite){ 
-            test.equal(anotherSite.Url, testSiteUrl2);
-            test.done();
+exports.SiteHasCorrectTitle = function(test){
+    var site = new Site(testSiteUrl, function(site){
+        test.equal(site.Title, testSiteTitle);
+        site = new Site(testSiteId, function(site){
+            test.equal(site.Title, testSiteTitle);
+            var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+                test.equal(anotherSite.Title, testSiteTitle2);
+                anotherSite = new Site(testSiteId2, function(anotherSite){ 
+                    test.equal(anotherSite.Title, testSiteTitle2);
+                    test.done();
+                });
+            });
         });
+    });
+};
+
+exports.NonExistentUrlReturnsNull = function(test) {
+    var site = new Site(testNonExistentSiteUrl, function(site){
+        test.equal(site, null);
+        test.done();
     });
 };
 
