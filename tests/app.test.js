@@ -16,8 +16,8 @@ var testSiteUrl2 = "http://localhost/sites/anotherteamsite";
 var testSiteRequestUrl = "http://localhost:" + portNumber + "/sites/teamsite"; // TODO: How to map the port nimber?
 var testSubRequestWebUrl = "http://localhost:" + portNumber + "/sites/teamsite/subsite"; // TODO: How to map the port nimber?
 var testSiteRequestUrl2 = "http://localhost:" + portNumber + "/sites/anotherteamsite"; // TODO: How to map the port nimber?
-var testNonExistentSiteRequestUrl = "http://localhost:" + portNumber + "/teamsite2";
-var testNonExistentSiteRequestUrl2 = "http://localhost:" + portNumber + "/nonexsistenturl";
+var testNonExistentSiteRequestUrl = "http://localhost:" + portNumber + "/nonexsistenturl";
+var testNonExistentSiteRequestUrl2 = "http://localhost:" + portNumber + "/sites/nonexsistenturl";
 
 var testRootWebTitle = "Teamsite Rootweb";
 var testSubWebTitle = "Teamsite Subweb";
@@ -48,8 +48,8 @@ exports.tearDown = function (done) {
 };
 
 exports.testServerServes404Page = function (test) {
-    httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl2, function(){
-        httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl, function(){
+    httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl, function(){
+        httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl2, function(){
             test.done();
         });
     });

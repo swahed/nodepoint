@@ -5,10 +5,13 @@ var router = express.Router();
 
 //var lists = require('../routes/lists');
 
-/* globals next */ // <!-- TODO: This Shouldn't be necessary with js-lint's node settings
-router.get('/sites/:sitename', function (req, res) {
+router.get('/sites/:sitename', function (req, res, next) {
 	var context = req.SPContext.Current;
-	if(!context.Site) next();
+	if(!context.Site) 
+	{
+		next();
+		return;
+	}
     res.render('index', { title: context.Site.RootWeb.Title });
 });
 

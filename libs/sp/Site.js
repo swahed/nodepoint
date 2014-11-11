@@ -54,8 +54,7 @@ var Site = function (Url, callback) {
         if (error) throw error;
         if(site === null) 
         {
-             // TODO: Optimize handling of non existent site. Object is not null.
-            callback(null);
+            callback(null); // TODO: Optimize handling of non existent site. Object is not null.
             return;
         }
         

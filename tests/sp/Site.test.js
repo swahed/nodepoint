@@ -72,7 +72,13 @@ exports.SiteHasCorrectTitle = function(test){
 exports.NonExistentUrlReturnsNull = function(test) {
     var site = new Site(testNonExistentSiteUrl, function(site){
         test.equal(site, null);
-        test.done();
+            test.done();
+
+        // TODO:
+        // site = new Site(testNonExistentSiteUrl, function(){
+        //     test.equal(site, null);
+        //     test.done();
+        // });
     });
 };
 
