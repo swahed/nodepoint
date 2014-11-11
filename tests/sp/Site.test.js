@@ -22,7 +22,7 @@ exports.SiteModuleExportsFunction = function(test){
 };
 
 exports.SiteHasCorrectId = function(test){
-    var site = new Site(testSiteUrl, function(site){ // TODO: Why can this not be accomplished ith a closure
+    var site = new Site(testSiteUrl, function(site){ // TODO: Why can this not be accomplished with a closure
 		test.equal(site.ID, testSiteId);
         site = new Site(testSiteId, function(site){ 
             test.equal(site.ID, testSiteId);

@@ -5,6 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>nodepoint</Name>
     <RootNamespace>nodepoint</RootNamespace>
+    <LaunchUrl>/sites/teamsite</LaunchUrl>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -12,7 +13,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99e2ac2a-2c75-4976-b3c6-1a6a6e7dc753</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>bin\www</StartupFile>
+    <StartupFile>vs.debugsettings.js</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -37,8 +38,7 @@
     <Compile Include="libs\sp\Site.js" />
     <Compile Include="libs\sp\Web.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\users.js" />
-    <Compile Include="bin\www" />
+    <Compile Include="routes\lists.js" />
     <Compile Include="server.js" />
     <Compile Include="tests\app.test.js" />
     <Compile Include="tests\server.test.js" />
@@ -53,9 +53,9 @@
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
+    <Content Include="vs.debugsettings.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\" />
     <Folder Include="libs\" />
     <Folder Include="libs\sp\" />
     <Folder Include="models\" />

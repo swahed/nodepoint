@@ -12,21 +12,35 @@ var getSite = edge.func(function () {/*
 	async (input) => { 
         SPContext.Initialize("tests_mocks/FakePoint.Fakes");
 
-		SPSite site = await Task.Run(() =>
-	    {
-	    	var s = input as string;
+		SPSite site = await Task.Run(() => // TODO: Check if this really excecutes asynchronously
+        {
+            var s = input as string;
             Guid id = new Guid();
-            if (Guid.TryParse(s, out id))
-                return new SPSite(id);
-            else
-                return new SPSite(s);
-	    });
+            SPSite result = null;
+            // TODO Add check if site exists
+            try
+            {
+                if (Guid.TryParse(s, out id))
+                    result = new SPSite(id);
+                else
+                    result = new SPSite(s);
+            }
+            catch (Exception ex)
+            {
+                // TODO Log error
+            }
 
-	    return new {
-	    	Title = site.Title,
-		    ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
-		    Url = site.Url
-	    };
+            return result;
+        });
+
+        if (site == null) return null; // TODO: Implement error handlin and logging in js instead: throw new Exception("Website was not found. Input: " + input.ToString());
+
+        return new
+        {
+            Title = site.Title,
+            ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
+            Url = site.Url
+        };
     }
 */
 });
@@ -38,6 +52,13 @@ var Site = function (Url, callback) {
     var self = this;
     getSite(Url, function getSiteCompleted(error, site) {
         if (error) throw error;
+        if(site === null) 
+        {
+             // TODO: Optimize handling of non existent site. Object is not null.
+            callback(null);
+            return;
+        }
+        
         self.Title = site.Title;
         self.ID = site.ID;
         self.Url = site.Url;
