@@ -47,7 +47,7 @@ sftp-config.json
 
 ## Ignore Visual Studio temporary files, build results
 
-.ntvs_analysis.dat
+.ntvs_analysis.dat*
 
 # User-specific files
 *.suo
