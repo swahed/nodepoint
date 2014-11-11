@@ -13,7 +13,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99e2ac2a-2c75-4976-b3c6-1a6a6e7dc753</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>vs.debugsettings.js</StartupFile>
+    <StartupFile>nodepoint.sln.debugsettings</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -53,7 +53,7 @@
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
-    <Content Include="vs.debugsettings.js" />
+    <Content Include="nodepoint.sln.debugsettings" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="libs\" />
