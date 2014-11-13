@@ -3,46 +3,10 @@
 var edge = require("edge");
 var Web = require("./web");
 
-var getSite = edge.func(function () {/*
-	#r "tests_mocks\FakePoint.dll"
-
-	using Microsoft.SharePoint;
-	using System.Dynamic;
-
-	async (input) => { 
-        SPContext.Initialize("tests_mocks/FakePoint.Fakes");
-
-		SPSite site = await Task.Run(() => // TODO: Check if this really excecutes asynchronously
-        {
-            var s = input as string;
-            Guid id = new Guid();
-            SPSite result = null;
-            // TODO Add check if site exists
-            try
-            {
-                if (Guid.TryParse(s, out id))
-                    result = new SPSite(id);
-                else
-                    result = new SPSite(s);
-            }
-            catch (Exception ex)
-            {
-                // TODO Log error
-            }
-
-            return result;
-        });
-
-        if (site == null) return null; // TODO: Implement error handlin and logging in js instead: throw new Exception("Website was not found. Input: " + input.ToString());
-
-        return new
-        {
-            Title = site.Title,
-            ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
-            Url = site.Url
-        };
-    }
-*/
+var getSite = edge.func({
+    assemblyFile: '..\\nodepoint.Adpater\\bin\\Debug\\nodepoint.Adpater.dll',
+    typeName: 'nodepoint.Adpater.Site',
+    methodName: 'GetSite'
 });
 
 var Site = function (Url, callback) {
