@@ -48,33 +48,27 @@ exports.tearDown = function (done) {
 };
 
 exports.testServerServes404Page = function (test) {
-    httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl, function(){
-        httpUtil.httpGetAndExpect404Page(test, testNonExistentSiteRequestUrl2, function(){
+    httpUtil.httpGetAndEndTest(testNonExistentSiteRequestUrl, function(){
+        httpUtil.httpGetAndEndTest(testNonExistentSiteRequestUrl2, function(){
             test.done();
-        });
-    });
+        }, 404);
+    }, 404);
 };
 
-exports.testServesCorrectSite = function(test){ // TODO: Setup dedicated test files for routes since this is acttually a test of routes/index.js. Currently this tests to many things at once.
-	httpUtil.httpGetAndEndTest(test, testSiteRequestUrl, function (result) {
-        var title = getTitle(result);
-        test.equal(title, testRootWebTitle, "Did not receive correct title for teamsite.");
-    }, function (){
-        httpUtil.httpGetAndEndTest(test, testSiteRequestUrl2, function (result) {
-            var title = getTitle(result);
-            test.equal(title, testRootWebTitle2, "Did not receive correct title for teamsite.");
-        }, function () {
-            test.done();
-        });
-    });
-}
+// exports.testServesCorrectSite = function(test){ // TODO: Setup dedicated test files for routes since this is acttually a test of routes/index.js. Currently this tests to many things at once.
+// 	httpUtil.httpGetAndEndTest(testSiteRequestUrl, function (result) {
+//         var title = httpUtil.getTitle(result);
+//         test.equal(title, testRootWebTitle, "Did not receive correct title for teamsite.");
 
-function getTitle(html){
-    var re = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/gi; // TODO: Improve method to extract title
-    var match = re.exec(html);
-    if (!match || match.length < 3) return "";
-    else return match[2];
-}
+//         httpUtil.httpGetAndEndTest(testSiteRequestUrl2, function (err, result) {
+//             var title = httpUtil.getTitle(result);
+//             test.equal(title, testRootWebTitle2, "Did not receive correct title for teamsite.");
+            
+//             test.done();
+//         });
+//     });
+// };
+
 
 // TODO: 
 /*exports.test_serverServesAFile = function (test) {

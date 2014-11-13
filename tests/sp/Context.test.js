@@ -40,28 +40,28 @@ exports.tearDown = function (done) {
 };
 
 exports.test_ContextIsNotNull = function (test) {
-    httpUtil.httpGetAndEndTest(test, testRequestUrl, null, function () {
+    httpUtil.httpGetAndEndTest(testRequestUrl, function () {
         test.notEqual(context, null, "Context object is null for url " + testRequestUrl);
         test.done();
     });
 };
 
 exports.test_ContextIsNotNull = function (test) {
-    httpUtil.httpGetAndEndTest(test, testRequestUrl, null, function () {
+    httpUtil.httpGetAndEndTest(testRequestUrl, function () {
         test.notEqual(context.Current, null, "Context.Current object is null for url " + testRequestUrl);
         test.done();
     });
 };
 
 exports.test_SiteIsNotNull = function (test) {
-    httpUtil.httpGetAndEndTest(test, testRequestUrl, null, function () {
+    httpUtil.httpGetAndEndTest(testRequestUrl, function () {
         test.notEqual(context.Current.Site, null, "Context.Current.Site object is null for url " + testRequestUrl);
         test.done();
     });
 };
 
 exports.test_SiteIsCorrect = function (test) {
-    httpUtil.httpGetAndEndTest(test, testRequestUrl, null, function () {
+    httpUtil.httpGetAndEndTest(testRequestUrl, function () {
         test.equal(context.Current.Site.Title, testSiteTitle, "Context.Current.Site.Title is wrong");
         test.equal(context.Current.Site.Url, testSiteUrl, "Context.Current.Site.Url is wrong");
         test.equal(context.Current.Site.ID, testSiteId, "Context.Current.Site.Id is wrong");
@@ -70,7 +70,7 @@ exports.test_SiteIsCorrect = function (test) {
 };
 
 exports.test_OtherSiteIsCorrect = function (test) {
-    httpUtil.httpGetAndEndTest(test, testRequestUrl2, null, function () {
+    httpUtil.httpGetAndEndTest(testRequestUrl2, function () {
         test.equal(context.Current.Site.Title, testSiteTitle2, "Context.Current.Site.Title is wrong");
         test.equal(context.Current.Site.Url, testSiteUrl2, "Context.Current.Site.Url is wrong");
         test.equal(context.Current.Site.ID, testSiteId2, "Context.Current.Site.Id is wrong");

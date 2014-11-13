@@ -54,9 +54,9 @@ exports.stopStopsAndCallsCallback = function (test) {
 
 exports.testServerServesFiles = function (test) {
     var url = "http://localhost:" + portNumber + "/sites/teamsite";
-    httpUtil.httpGetAndEndTest(test, url, function(data){
+    httpUtil.httpGetAndEndTest(url, function (error, data) {
+        console.log(error);
         test.notEqual(null, data);
-    }, function () {
         test.done();
     }); 
 };
