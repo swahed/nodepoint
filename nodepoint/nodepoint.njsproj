@@ -13,7 +13,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99e2ac2a-2c75-4976-b3c6-1a6a6e7dc753</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>nodepoint.sln.debugsettings</StartupFile>
+    <StartupFile>nodepoint.njsproj.debugsettings</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -47,13 +47,12 @@
     <Compile Include="tests\sp\Context.test.js" />
     <Compile Include="tests\sp\Site.test.js" />
     <Compile Include="tests\testUtility.js" />
+    <Content Include="nodepoint.njsproj.debugsettings" />
     <Content Include="package.json" />
     <Content Include="public\css\style.styl" />
-    <Content Include="README.md" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
-    <Content Include="nodepoint.sln.debugsettings" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="libs\" />

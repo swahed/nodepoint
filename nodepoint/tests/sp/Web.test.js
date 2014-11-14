@@ -16,14 +16,14 @@ var testRootWebTitle2 = "Teamsite 2 Rootweb";
 var site;
 // TODO: Setup with other site
 exports.setUp = function (done) {
-    site = new Site(testSubWebUrl, function (site) {
+    site = new Site(testSubWebUrl, function () {
         done();
     });
 };
 
 /* TODO
 exports.ConstructorWithIDOpensCorrectWeb = function(test){
-    var web = new Web(null, function(web){
+    var web = new Web(null, function(){
         test.equal(web.ID, testSubWebId, "Wrong ID for web with url" + testSubWebUrl);
         test.done();
     });
@@ -31,7 +31,7 @@ exports.ConstructorWithIDOpensCorrectWeb = function(test){
 */
 
 exports.ConstructorWithIDOpensCorrectWeb = function (test) {
-    var web = new Web(testSubWebId, function (web) {
+    var web = new Web(testSubWebId, function () { // TODO: Why can't this be accomplished by a closure as with the site object?
         test.equal(web.ID, testSubWebId, "Wrong ID for web with url" + testSubWebUrl);
         test.equal(web.Url, testSubWebUrl, "Wrong Url for web with ID" + testSubWebId);
         test.done();
@@ -39,7 +39,7 @@ exports.ConstructorWithIDOpensCorrectWeb = function (test) {
 };
 
 exports.ConstructorWithUrlOpensCorrectWeb = function (test) {
-    var web = new Web(testOtherSubWebUrl, function (web) {
+    var web = new Web(testOtherSubWebUrl, function () {
         test.equal(web.ID, testOtherSubWebId, "Wrong ID for web with url" + testOtherSubWebUrl);
         test.equal(web.Url, testOtherSubWebUrl, "Wrong Url for web with ID" + testOtherSubWebId);
         test.done();
@@ -47,28 +47,28 @@ exports.ConstructorWithUrlOpensCorrectWeb = function (test) {
 };
 
 exports.GetterWithoutParameterOpensWebFromRequestUrl = function (test) {
-    var web = site.OpenWeb(null, function (web) {
+    var web = site.OpenWeb(null, function () {
         test.equal(web.ID, testSubWebId, "Wrong ID for web with url" + testSubWebUrl);
         test.done();
     });
 };
 
 exports.GetterWithIDOpensCorrectWeb = function (test) {
-    var web = site.OpenWeb(null, function (web) {
+    var web = site.OpenWeb(null, function () {
         test.equal(web.ID, testSubWebId, "Wrong ID for web with url" + testSubWebUrl);
         test.done();
     });
 };
 
 exports.GetterWithUrlOpensCorrectWeb = function (test) {
-    var web = site.OpenWeb(testOtherSubWebUrl, function (web) {
+    var web = site.OpenWeb(testOtherSubWebUrl, function () {
         test.equal(web.ID, testOtherSubWebId, "Wrong ID for web with url" + testOtherSubWebUrl);
         test.done();
     });
 };
 
 exports.WebHasCorrectUrl = function (test) {
-    var web = site.OpenWeb(testSubWebId, function (web) {
+    var web = site.OpenWeb(testSubWebId, function () {
         test.equal(web.Url, testSubWebUrl, "Wrong Url for web with url" + testSubWebId);
         test.done();
     });
@@ -77,7 +77,7 @@ exports.WebHasCorrectUrl = function (test) {
 exports.WebHasCorrectTitle = function (test) {
     var web     = site.RootWeb;
     test.equal(web.Title, testRootWebTitle, "Wrong Title for web with url " + site.Url);
-    web = site.OpenWeb(testSubWebId, function (web) {
+    web = site.OpenWeb(testSubWebId, function () {
         test.equal(web.Title, testSubWebTitle, "Wrong Title for web with url" + testSubWebId);
         test.done();
     });

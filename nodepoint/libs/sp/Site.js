@@ -14,11 +14,12 @@ var Site = function (Url, callback) {
     //if(!url || !url.match()) TODO: Validate URL
     //	throw "Site url parameter is not a full url";
     var self = this;
+    self.isNull = function () { return (typeof self.ID === 'undefined'); }; // TODO: Getter // TODO: Site === null possible?
     getSite(Url, function getSiteCompleted(error, site) {
         if (error) throw error;
         if(site === null) 
         {
-            callback(null); // TODO: Optimize handling of non existent site. Object is not null.
+            callback(); // TODO: Optimize handling of non existent site. Object is not null.
             return;
         }
         
@@ -26,9 +27,8 @@ var Site = function (Url, callback) {
         self.ID = site.ID;
         self.Url = site.Url;
         self._ContructorUrl = Url;
-        var web = new Web(site.Url, function getRootWebCompleted(web) {
-            self.RootWeb = web;
-            callback(self);
+        self.RootWeb = new Web(site.Url, function getRootWebCompleted() {
+            callback();
         });
     });
 };
@@ -44,9 +44,11 @@ Site.prototype.OpenWeb = function (openUrl, callback) {
         }
     }
     
-    var web = new Web(webUrl, function OpenWebComplete(web) {
-        callback(web);
+    var web = new Web(webUrl, function OpenWebComplete() {
+        callback();
     });
+
+    return web;
 };
 
 module.exports = Site;

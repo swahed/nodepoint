@@ -55,19 +55,19 @@ exports.testServerServes404Page = function (test) {
     }, 404);
 };
 
-// exports.testServesCorrectSite = function(test){ // TODO: Setup dedicated test files for routes since this is acttually a test of routes/index.js. Currently this tests to many things at once.
-// 	httpUtil.httpGetAndEndTest(testSiteRequestUrl, function (result) {
-//         var title = httpUtil.getTitle(result);
-//         test.equal(title, testRootWebTitle, "Did not receive correct title for teamsite.");
+ exports.testServesCorrectSite = function(test){ // TODO: Setup dedicated test files for routes since this is acttually a test of routes/index.js. Currently this tests to many things at once.
+ 	httpUtil.httpGetAndEndTest(testSiteRequestUrl, function (err, result) {
+         var title = httpUtil.getTitle(result);
+         test.equal(title, testRootWebTitle, "Did not receive correct title for teamsite.");
 
-//         httpUtil.httpGetAndEndTest(testSiteRequestUrl2, function (err, result) {
-//             var title = httpUtil.getTitle(result);
-//             test.equal(title, testRootWebTitle2, "Did not receive correct title for teamsite.");
+        httpUtil.httpGetAndEndTest(testSiteRequestUrl2, function (err, result) {
+             var title = httpUtil.getTitle(result);
+             test.equal(title, testRootWebTitle2, "Did not receive correct title for teamsite.");
             
-//             test.done();
-//         });
-//     });
-// };
+             test.done();
+         });
+     });
+ };
 
 
 // TODO: 

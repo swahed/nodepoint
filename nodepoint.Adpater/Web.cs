@@ -15,25 +15,11 @@ namespace nodepoint.Adpater
             SPContext.Initialize("tests_mocks/FakePoint.Fakes");
             var site = SPContext.Current.Site;  			// TODO: Does not use correct site
 
-            if (string.IsNullOrEmpty(input as string))
+            var result = await Task.Run(() =>
             {
-                using (var web = site.OpenWeb())
+                if (string.IsNullOrEmpty(input as string))
                 {
-                    return new
-                    {
-                        ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-                        Title = web.Title,
-                        Url = web.Url
-                    };
-                }
-            }
-            else
-            {
-                var s = input as string;
-                Guid id = new Guid();
-                if (Guid.TryParse(s, out id))
-                {
-                    using (var web = site.OpenWeb(id))
+                    using (var web = site.OpenWeb())
                     {
                         return new
                         {
@@ -45,17 +31,36 @@ namespace nodepoint.Adpater
                 }
                 else
                 {
-                    using (var web = site.OpenWeb(s))
+                    var s = input as string;
+                    Guid id = new Guid();
+                    if (Guid.TryParse(s, out id))
                     {
-                        return new
+                        using (var web = site.OpenWeb(id))
                         {
-                            ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-                            Title = web.Title,
-                            Url = web.Url
-                        };
+                            return new
+                            {
+                                ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                                Title = web.Title,
+                                Url = web.Url
+                            };
+                        }
+                    }
+                    else
+                    {
+                        using (var web = site.OpenWeb(s))
+                        {
+                            return new
+                            {
+                                ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                                Title = web.Title,
+                                Url = web.Url
+                            };
+                        }
                     }
                 }
-            }
+            });
+
+            return result;
         }
 
     }

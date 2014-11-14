@@ -20,7 +20,7 @@ var testSiteTitle2 = "SPSite Url=http://localhost/sites/anotherteamsite";
 
 var context = null;
 var app = express();
-app.use("*", contextCreator); // TODO: This will probably duplicate all or part of the routing logic
+app.use("*", contextCreator);
 app.get("*", function (req, res) {
     context = req.SPContext;
     res.end("done");

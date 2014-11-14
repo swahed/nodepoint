@@ -22,13 +22,13 @@ exports.SiteModuleExportsFunction = function(test){
 };
 
 exports.SiteHasCorrectId = function(test){
-    var site = new Site(testSiteUrl, function(site){ // TODO: Why can this not be accomplished with a closure
+    var site = new Site(testSiteUrl, function(){
 		test.equal(site.ID, testSiteId);
-        site = new Site(testSiteId, function(site){ 
+        site = new Site(testSiteId, function(){ 
             test.equal(site.ID, testSiteId);
-            var anotherSite = new Site(testSiteId2, function(anotherSite){ 
+            var anotherSite = new Site(testSiteId2, function(){ 
                 test.equal(anotherSite.ID, testSiteId2);
-                anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+                anotherSite = new Site(testSiteUrl2, function(){ 
                     test.equal(anotherSite.ID, testSiteId2);
                     test.done();
                 });
@@ -38,13 +38,13 @@ exports.SiteHasCorrectId = function(test){
 };
 
 exports.SiteHasCorrectUrl = function(test){
-    var site = new Site(testSiteUrl, function(site){
+    var site = new Site(testSiteUrl, function(){
         test.equal(site.Url, testSiteUrl);
-        site = new Site(testSiteId, function(site){
+        site = new Site(testSiteId, function(){
             test.equal(site.Url, testSiteUrl);
-            var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+            var anotherSite = new Site(testSiteUrl2, function(){ 
                 test.equal(anotherSite.Url, testSiteUrl2);
-                anotherSite = new Site(testSiteId2, function(anotherSite){ 
+                anotherSite = new Site(testSiteId2, function(){ 
                     test.equal(anotherSite.Url, testSiteUrl2);
                     test.done();
                 });
@@ -54,13 +54,13 @@ exports.SiteHasCorrectUrl = function(test){
 };
 
 exports.SiteHasCorrectTitle = function(test){
-    var site = new Site(testSiteUrl, function(site){
+    var site = new Site(testSiteUrl, function(){
         test.equal(site.Title, testSiteTitle);
-        site = new Site(testSiteId, function(site){
+        site = new Site(testSiteId, function (){
             test.equal(site.Title, testSiteTitle);
-            var anotherSite = new Site(testSiteUrl2, function(anotherSite){ 
+            var anotherSite = new Site(testSiteUrl2, function(){ 
                 test.equal(anotherSite.Title, testSiteTitle2);
-                anotherSite = new Site(testSiteId2, function(anotherSite){ 
+                anotherSite = new Site(testSiteId2, function(){ 
                     test.equal(anotherSite.Title, testSiteTitle2);
                     test.done();
                 });
@@ -70,9 +70,9 @@ exports.SiteHasCorrectTitle = function(test){
 };
 
 exports.NonExistentUrlReturnsNull = function(test) {
-    var site = new Site(testNonExistentSiteUrl, function(site){
-        test.equal(site, null);
-            test.done();
+    var site = new Site(testNonExistentSiteUrl, function(){
+        test.equal(site.isNull(), true);
+        test.done();
 
         // TODO:
         // site = new Site(testNonExistentSiteUrl, function(){
@@ -83,8 +83,8 @@ exports.NonExistentUrlReturnsNull = function(test) {
 };
 
 exports.OpenWebOpenRootWebWhenSiteWasCreatedWithRootWebUrl = function(test){
-    var site = new Site(testSiteUrl, function(site){
-        var web = site.OpenWeb(null, function(web){
+    var site = new Site(testSiteUrl, function(){
+        var web = site.OpenWeb(null, function(){
             test.equal(web.ID, testRootWebId, "Wrong ID for web with url" + testSiteUrl);
             test.done();
         });
@@ -92,8 +92,8 @@ exports.OpenWebOpenRootWebWhenSiteWasCreatedWithRootWebUrl = function(test){
 };
 
 exports.OpenWebOpensubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
-    var site = new Site(testSubWebUrl, function(site){
-        var web = site.OpenWeb(null, function(web){
+    var site = new Site(testSubWebUrl, function(){
+        var web = site.OpenWeb(null, function(){
             test.equal(web.ID, testSubWebId, "Wrong ID for web with url " + testSubWebUrl);
             test.done();
         });
@@ -101,8 +101,8 @@ exports.OpenWebOpensubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
 };
 
 exports.OpenWebOpenSubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
-    var site = new Site(testSubWebUrl, function(site){
-        var web = site.OpenWeb(testSubWebUrl, function(web){
+    var site = new Site(testSubWebUrl, function(){
+        var web = site.OpenWeb(testSubWebUrl, function(){
             test.equal(web.ID, testSubWebId);
             test.done();
         });
@@ -110,8 +110,8 @@ exports.OpenWebOpenSubWebWhenSiteWasCreatedWithsubWebUrl = function(test){
 };
 
 exports.OpenWebOpenRootWebWhenSiteWasCreatedWithsubWebUrl = function(test){
-    var site = new Site(testSubWebUrl, function(site){
-        var web = site.OpenWeb(testSiteUrl, function(web){
+    var site = new Site(testSubWebUrl, function(){
+        var web = site.OpenWeb(testSiteUrl, function(){
             test.equal(web.ID, testRootWebId);
             test.done();
         });
@@ -121,8 +121,8 @@ exports.OpenWebOpenRootWebWhenSiteWasCreatedWithsubWebUrl = function(test){
 // TODO: Conecpt on how to implement this... options object? {Url: ..., ID: ...}
 //exports.OpenWebOpensubWebById = function(test){
 //    test.fail(":)");
-//    var site = new Site(testSubWebUrl, function(site){
-//        var web = site.OpenWeb(testSubWebId, function(web){
+//    var site = new Site(testSubWebUrl, function(){
+//        var web = site.OpenWeb(testSubWebId, function(){
 //            test.equal(web.ID, testSubWebId);
 //            test.equal(web.Url, testSubWebUrl);
 //            test.done();
@@ -131,7 +131,7 @@ exports.OpenWebOpenRootWebWhenSiteWasCreatedWithsubWebUrl = function(test){
 //};
 
 exports.RootWebIsCorrect = function(test){
-    var site = new Site(testSubWebUrl, function(site){
+    var site = new Site(testSubWebUrl, function(){
         var rootWeb = site.RootWeb;
         test.equal(rootWeb.ID, testRootWebId);
         test.done();
@@ -139,7 +139,7 @@ exports.RootWebIsCorrect = function(test){
 };
 
 //exports.DiposeDisposes = function(test){
-//    var site = new Site(testSubWebUrl, function(site){
+//    var site = new Site(testSubWebUrl, function(){
 //        site.Dispose(); 
 //        test.IsNull(site);
 //    });

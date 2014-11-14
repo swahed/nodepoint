@@ -8,17 +8,23 @@ var getWeb = edge.func({
     methodName: 'GetWeb'
 });
 
-var Web = function (Url, callback)
-{
- // TODO: Should the contructor be usable? Would need tests
+var Web = function (Url, callback) {  // TODO: Should the contructor be usable? Would need tests
+    //if(typeof callback !== "function") throw "Callback parameter is not a function"; // TODO
+    //if(!url || !url.match()) TODO: Validate URL
+    //	throw "Site url parameter is not a full url";
     var self = this;
-    getWeb(Url, function getWebComplete(error, result) {
+    getWeb(Url, function getWebComplete(error, web) {
         if (error) throw error;
-        this.ID = result.ID;
-        this.Url = result.Url;
-        this.Title = result.Title;
-        this.Lists = {};
-        callback(this);
+        if (web === null) {
+            callback(null); // TODO: Optimize handling of non existent site. Object is not null.
+            return;
+        }
+        
+        self.ID = web.ID;
+        self.Url = web.Url;
+        self.Title = web.Title;
+        self.Lists = [];
+        callback();
     });
 };
 
