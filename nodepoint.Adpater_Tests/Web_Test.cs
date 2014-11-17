@@ -51,12 +51,12 @@ namespace nodepoint.Adpater_Tests
             Assert.IsTrue(web.AllowUnsafeUpdates);
         }
 
-        //[TestMethod]
-        //public async Task ListCollectionNotNull()
-        //{
-        //    dynamic site = await (new Site()).GetSite(testSiteUrl);
-        //    dynamic web = site.RootWeb;
-        //    Assert.IsNotNull(web.Lists);
-        //}
+        [TestMethod]
+        public async Task ListCollectionNotNull()
+        {
+            dynamic site = await (new Site()).GetSite(testSiteUrl);
+            dynamic web = site.RootWeb;
+            Assert.IsNotNull(web.Lists);
+        }
     }
 }

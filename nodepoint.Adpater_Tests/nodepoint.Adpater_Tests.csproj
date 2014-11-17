@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="Site_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FieldCollection_Test.cs" />
+    <Compile Include="Field_Test.cs" />
+    <Compile Include="Item_Tests.cs" />
+    <Compile Include="ListCollection_Test.cs" />
+    <Compile Include="ListItemCollection_Test.cs" />
+    <Compile Include="List_Test.cs" />
     <Compile Include="Web_Test.cs" />
   </ItemGroup>
   <ItemGroup>

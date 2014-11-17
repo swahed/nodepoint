@@ -13,56 +13,38 @@ namespace nodepoint.Adpater
         public async Task<object> GetWeb(object input) // TODO run openweb asynchronously...
         {
             var site = SPContext.Current.Site;  			// TODO: Does not use correct site
-
-            var result = await Task.Run(() =>
+            SPWeb web = await Task.Run(() =>
             {
+                SPWeb result;
                 if (string.IsNullOrEmpty(input as string))
                 {
-                    using (var web = site.OpenWeb())
-                    {
-                        return new
-                        {
-                            ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-                            Title = web.Title,
-                            Url = web.Url,
-                            AllowUnsafeUpdates = true
-                        };
-                    }
+                    result = site.OpenWeb();
                 }
                 else
                 {
                     var s = input as string;
                     Guid id = new Guid();
                     if (Guid.TryParse(s, out id))
-                    {
-                        using (var web = site.OpenWeb(id))
-                        {
-                            return new
-                            {
-                                ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-                                Title = web.Title,
-                                Url = web.Url,
-                                AllowUnsafeUpdates = true
-                            };
-                        }
-                    }
+                        result = site.OpenWeb(id);
                     else
-                    {
-                        using (var web = site.OpenWeb(s))
-                        {
-                            return new
-                            {
-                                ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
-                                Title = web.Title,
-                                Url = web.Url,
-                                AllowUnsafeUpdates = true
-                            };
-                        }
-                    }
+                        result = site.OpenWeb(s);
                 }
+
+                return result;
             });
 
-            return result;
+            object lists = null;
+            if (web.Lists != null) // TODO: Workaround since current test xml is invalid and subwebs do not have list object
+                lists = await (new ListCollection()).GetLists(web);
+
+            return new
+            {
+                ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                Title = web.Title,
+                Url = web.Url,
+                AllowUnsafeUpdates = true,
+                Lists = lists
+            };
         }
 
     }

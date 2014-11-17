@@ -50,12 +50,13 @@ namespace nodepoint.Adpater
                     else
                         return await new Web().GetWeb(i);
                 }),
-                RootWeb = new
+                RootWeb = new // TODO: Duplicate to Web.cs
                 {
                     ID = site.RootWeb.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
                     Title = site.RootWeb.Title,
                     Url = site.RootWeb.Url,
-                    AllowUnsafeUpdates = true
+                    AllowUnsafeUpdates = true,
+                    Lists = await new ListCollection().GetLists(site.RootWeb)
                 }
             };
 		}
