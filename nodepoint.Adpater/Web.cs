@@ -12,7 +12,6 @@ namespace nodepoint.Adpater
     {
         public async Task<object> GetWeb(object input) // TODO run openweb asynchronously...
         {
-            SPContext.Initialize("tests_mocks/FakePoint.Fakes");
             var site = SPContext.Current.Site;  			// TODO: Does not use correct site
 
             var result = await Task.Run(() =>
@@ -25,7 +24,8 @@ namespace nodepoint.Adpater
                         {
                             ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
                             Title = web.Title,
-                            Url = web.Url
+                            Url = web.Url,
+                            AllowUnsafeUpdates = true
                         };
                     }
                 }
@@ -41,7 +41,8 @@ namespace nodepoint.Adpater
                             {
                                 ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
                                 Title = web.Title,
-                                Url = web.Url
+                                Url = web.Url,
+                                AllowUnsafeUpdates = true
                             };
                         }
                     }
@@ -53,7 +54,8 @@ namespace nodepoint.Adpater
                             {
                                 ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
                                 Title = web.Title,
-                                Url = web.Url
+                                Url = web.Url,
+                                AllowUnsafeUpdates = true
                             };
                         }
                     }

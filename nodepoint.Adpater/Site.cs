@@ -13,8 +13,6 @@ namespace nodepoint.Adpater
 	{
 		public async Task<object> GetSite(object input)
 		{
-            SPContext.Initialize("tests_mocks/FakePoint.Fakes");
-
 		    SPSite site = await Task.Run(() =>
             {
                 var s = input as string;
@@ -30,7 +28,8 @@ namespace nodepoint.Adpater
                 }
                 catch (Exception ex)
                 {
-                    // TODO Log error
+                    Console.WriteLine("Error " + ex);
+                    //throw; // TODO: Exception makes edge crash and cannot be handled. Return error object
                 }
 
                 return result;
@@ -42,7 +41,22 @@ namespace nodepoint.Adpater
             {
                 Title = site.Title,
                 ID = site.ID.ToString("B").ToUpper(), // TODO: move Formatting to Javascript
-                Url = site.Url
+                Url = site.Url,
+                OpenWeb = new Func<object, Task<object>>(
+                async (i) =>
+                {
+                    if(i==null)
+                        return await new Web().GetWeb(input);
+                    else
+                        return await new Web().GetWeb(i);
+                }),
+                RootWeb = new
+                {
+                    ID = site.RootWeb.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
+                    Title = site.RootWeb.Title,
+                    Url = site.RootWeb.Url,
+                    AllowUnsafeUpdates = true
+                }
             };
 		}
 	}	
