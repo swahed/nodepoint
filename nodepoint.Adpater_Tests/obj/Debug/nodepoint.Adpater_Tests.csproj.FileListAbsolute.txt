@@ -1,9 +1,0 @@
-C:\node\nodepoint\nodepoint.Adpater_Tests\obj\Debug\nodepoint.Adpater_Tests.csprojResolveAssemblyReference.cache
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\nodepoint.Adpater_Tests.dll
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\nodepoint.Adpater_Tests.pdb
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\nodepoint.Adpater.dll
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\FakePoint.dll
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\nodepoint.Adpater.pdb
-C:\node\nodepoint\nodepoint.Adpater_Tests\obj\Debug\nodepoint.Adpater_Tests.dll
-C:\node\nodepoint\nodepoint.Adpater_Tests\obj\Debug\nodepoint.Adpater_Tests.pdb
-C:\node\nodepoint\nodepoint.Adpater_Tests\bin\Debug\FakePoint.Fakes.manifest.xml
