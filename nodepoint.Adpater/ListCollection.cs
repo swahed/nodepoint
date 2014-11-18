@@ -18,11 +18,26 @@ namespace nodepoint.Adpater
                 return web.Lists;
             });
 
-            return new
-            {
-                Count = lists.Count
-            };
-        }
+            if (lists == null) return null; // TODO: Remove
 
+            var results = from list in lists
+                          select new
+                          {
+                              Title = list.Title,
+                              //Fields = (from field in list.Fields  // TODO: asynch? deferred?
+                              //          select new
+                              //          {
+                              //              Title = field.Title
+                              //          }).ToArray(),
+                              //Items = (from item in list.Items  // TODO: asynch? deferred?
+                              //         select new
+                              //         {
+                              //             Title = item.Title
+                              //         }).ToArray()
+                          };
+
+
+            return results.ToArray();
+        }
     }
 }

@@ -5,88 +5,92 @@ using System.Threading.Tasks;
 
 namespace nodepoint.Adpater_Tests
 {
-    //[TestClass]
-    //public class SPList_Test
-    //{
-    //    int testListId = 11;
+    [TestClass]
+    public class SPList_Test
+    {
+        string testSiteUrl = "http://localhost/sites/teamsite";
+        int testListId = 11;
 
-    //    SPList list;
+        //[TestInitialize] // TODO: Does not support async?
+        private async Task<dynamic> InitAsync()
+        {
+            dynamic site = await (new Site()).GetSite(testSiteUrl);
+            dynamic web = await site.OpenWeb(null);
+            return web.Lists[testListId];
+        }
 
-    //    [TestInitialize]
-    //    public void Init()
-    //    {
-    //        list = SPContext.Current.Web.Lists[testListId];
-    //    }
+        [TestMethod]
+        public async Task TitleIsCorrect()
+        {
+            dynamic list = await InitAsync();
+            Assert.AreEqual("Site Pages", list.Title);
+        }
 
-    //    [TestMethod]
-    //    public void TitleIsCorrect()
-    //    {
-    //        Assert.AreEqual("Site Pages", list.Title);
-    //    }
+        //[TestMethod]
+        //public async Task ItemsIsNotNull()
+        //{
+        //    dynamic list = await InitAsync();
+        //    Assert.IsNotNull(list.Items);
+        //}
 
-    //    [TestMethod]
-    //    public void ItemsIsNotNull()
-    //    {
-    //        Assert.IsNotNull(list.Items);
-    //    }
+        //[TestMethod]
+        //public async Task ItemsCountCorrect()
+        //{
+        //    dynamic list = await InitAsync();
+        //    Assert.AreEqual(1, list.Items.Length);
+        //}
 
-    //    [TestMethod]
-    //    public void ItemsCountCorrect()
-    //    {
-    //        Assert.AreEqual(1, list.ItemCount);
-    //    }
+        //[TestMethod]
+        //public async Task FieldsIsNotNull()
+        //{
+        //    Assert.IsNotNull(list.Fields);
+        //}
 
-    //    [TestMethod]
-    //    public void FieldsIsNotNull()
-    //    {
-    //        Assert.IsNotNull(list.Fields);
-    //    }
+        //[TestMethod]
+        //public async Task ItemsReturnsNotNull()
+        //{
+        //    SPListItemCollection items = list.Items;
+        //    Assert.IsNotNull(items);
+        //}
 
-    //    [TestMethod]
-    //    public void ItemsReturnsNotNull()
-    //    {
-    //        SPListItemCollection items = list.Items;
-    //        Assert.IsNotNull(items);
-    //    }
+        //[TestMethod]
+        //public async Task GetItemsReturnsNotNull()
+        //{
+        //    SPListItemCollection items = list.Items;
+        //    items = list.GetItems(new SPQuery());
+        //    Assert.IsNotNull(items);
+        //}
 
-    //    [TestMethod]
-    //    public void GetItemsReturnsNotNull()
-    //    {
-    //        SPListItemCollection items = list.Items;
-    //        items = list.GetItems(new SPQuery());
-    //        Assert.IsNotNull(items);
-    //    }
+        //// GetItems returns correct number of items -> SPListItemsCollection
+        //[TestMethod]
+        //public async Task GetItemsRetrunsCorrectNumberOfitems()
+        //{
+        //    SPListItemCollection items = list.Items;
+        //    items = list.GetItems(new SPQuery());
+        //    Assert.AreEqual(1, items.Count);
+        //}
 
-    //    // GetItems returns correct number of items -> SPListItemsCollection
-    //    [TestMethod]
-    //    public void GetItemsRetrunsCorrectNumberOfitems()
-    //    {
-    //        SPListItemCollection items = list.Items;
-    //        items = list.GetItems(new SPQuery());
-    //        Assert.AreEqual(1, items.Count);
-    //    }
+        //[TestMethod]
+        //public async Task GetItemByIdReturnsCorrectItem()
+        //{
+        //    SPItem item = list.GetItemById(11);
+        //    Assert.AreEqual(11, item.ID);
+        //}
 
-    //    [TestMethod]
-    //    public void GetItemByIdReturnsCorrectItem()
-    //    {
-    //        SPItem item = list.GetItemById(11); 
-    //        Assert.AreEqual(11, item.ID);
-    //    }
+        // Update() does nothing?
+        //[TestMethod]
+        //public async Task UpdateUpdates()
+        //{
+        //    list.Update();
+        //    Assert.Fail();
+        //}
 
-    //    // Update() does nothing?
-    //    //[TestMethod]
-    //    //public void UpdateUpdates()
-    //    //{
-    //    //    list.Update();
-    //    //    Assert.Fail();
-    //    //}
-
-    //    // Deletes() deletes // TODO: Doesn't thsi need allowunsafeupdates ans web.Update() ?
-    //    //[TestMethod]
-    //    //public void DeleteDeletes()
-    //    //{
-    //    //    list.Delete();
-    //    //    Assert.IsNull(list);
-    //    //}
-    //}
+        // Deletes() deletes // TODO: Doesn't thsi need allowunsafeupdates ans web.Update() ?
+        //[TestMethod]
+        //public async Task DeleteDeletes()
+        //{
+        //    list.Delete();
+        //    Assert.IsNull(list);
+        //}
+    }
 }

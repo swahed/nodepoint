@@ -10,7 +10,7 @@ namespace nodepoint.Adpater
 {
     class Web
     {
-        public async Task<object> GetWeb(object input) // TODO run openweb asynchronously...
+        public async Task<object> GetWeb(object input)
         {
             var site = SPContext.Current.Site;  			// TODO: Does not use correct site
             SPWeb web = await Task.Run(() =>
@@ -32,18 +32,14 @@ namespace nodepoint.Adpater
 
                 return result;
             });
-
-            object lists = null;
-            if (web.Lists != null) // TODO: Workaround since current test xml is invalid and subwebs do not have list object
-                lists = await (new ListCollection()).GetLists(web);
-
+            
             return new
             {
                 ID = web.ID.ToString("B").ToUpper(), 	// TODO: move Formatting to Javascript
                 Title = web.Title,
                 Url = web.Url,
                 AllowUnsafeUpdates = true,
-                Lists = lists
+                Lists = await (new ListCollection()).GetLists(web)
             };
         }
 

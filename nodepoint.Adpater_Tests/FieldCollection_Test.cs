@@ -5,24 +5,25 @@ using System.Threading.Tasks;
 
 namespace nodepoint.Adpater_Tests
 {
-    //[TestClass]
-    //public class SPFieldCollection_Test
-    //{
-    //    int testListId = 11;
-    //    SPFieldCollection fields;
+    [TestClass]
+    public class SPFieldCollection_Test
+    {
+        //string testSiteUrl = "http://localhost/sites/teamsite";
+        //int testListId = 11;
 
-    //    [TestInitialize]
-    //    public void Init()
-    //    {
-    //        fields = SPContext.Current.Web.Lists[testListId].Fields;
-    //    }
+        ////[TestInitialize] // TODO: Does not support async?
+        //private async Task<dynamic> InitAsync()
+        //{
+        //    dynamic site = await (new Site()).GetSite(testSiteUrl);
+        //    dynamic web = await site.OpenWeb(null);
+        //    return web.Lists[testListId].Fields;
+        //}
 
-    //    [TestMethod]
-    //    public void FieldsCountCorrect()
-    //    {
-    //        Assert.AreEqual(71, fields.Count);
-    //    }
-
-    //    // TODO: [] int, Guid, string
-    //}
+        //[TestMethod]
+        //public async Task FieldsCountCorrect()
+        //{
+        //    dynamic fields = await InitAsync();
+        //    Assert.AreEqual(71, fields.Count);
+        //}
+    }
 }

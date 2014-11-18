@@ -1,4 +1,4 @@
-/// <vs BeforeBuild='default' />
+/// <vs AfterBuild='default' />
 /*jslint node: true */
 module.exports = function(grunt) {
   "use strict";
